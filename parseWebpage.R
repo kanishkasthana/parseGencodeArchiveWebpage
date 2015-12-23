@@ -40,7 +40,7 @@ totalGenes2=as.numeric(sapply(totalGenes2Lines,function(line){
 }))
 #Combinging Total Genes into a single vector
 totalGenes=c(totalGenes1,totalGenes2)
-pdf("TotalGenesPlot.pdf")
+svg("TotalGenesPlot.svg")
 plot(rev(totalGenes), type = 'l', xaxt="n", xlab="Release Version", ylab="Total Genes", main="Plot of Total Human Genes with Version Number")
 axis(1, at=1:length(totalGenes), labels=rev(versions))
 plot(rev(totalGenes), type = 'l', xaxt="n", xlab="Time of release", ylab="Total Genes", main="Plot of Total Human Genes with Time of Release")
