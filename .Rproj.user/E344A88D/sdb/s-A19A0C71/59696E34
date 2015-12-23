@@ -1,12 +1,12 @@
 {
-    "contents" : "#Script Created by Kanishk Asthana\n",
+    "contents" : "#Script Created by Kanishk Asthana\narchivePage=readLines(\"http://www.gencodegenes.org/stats/archive.html\")\n#Finding gencode version indices\nversionIndices=grep(\"Version\\\\s[0-9]\",archivePage)\nversionLine=archivePage[versionIndices]\n\nversionReleasePeriod=sapply(versionLine, function(line){\n  #Deleting First part of the String\n  line=sub(\".*\\\\(\",\"\",line)\n  #Deleting Second unwanted part of String\n  line=sub(\"\\\\sfreeze,\\\\s.*\\\\).*\",\"\",line)\n  print(line)\n  return(line)\n})\n#Storing Names of all Version in a vector\nversionReleasePeriod=as.character(versionReleasePeriod)\n",
     "created" : 1450860565274.000,
-    "dirty" : true,
+    "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "1994352535",
+    "hash" : "3689694781",
     "id" : "59696E34",
-    "lastKnownWriteTime" : 1450860574,
+    "lastKnownWriteTime" : 1450864884,
     "path" : "/work/kanishk/Documents/Github/parseGencodeArchiveWebpage/parseWebpage.R",
     "project_path" : null,
     "properties" : {
