@@ -1,12 +1,12 @@
 {
-    "contents" : "#Script Created by Kanishk Asthana\narchivePage=readLines(\"http://www.gencodegenes.org/stats/archive.html\")\n#Finding gencode version indices\nversionIndices=grep(\"Version\\\\s[0-9]\",archivePage)\nversionLine=archivePage[versionIndices]\n\nversionReleasePeriod=sapply(versionLine, function(line){\n  #Deleting First part of the String\n  line=sub(\".*\\\\(\",\"\",line)\n  #Deleting Second unwanted part of String\n  line=sub(\"\\\\sfreeze,\\\\s.*\\\\).*\",\"\",line)\n  print(line)\n  return(line)\n})\n#Storing Names of all Version in a vector\nversionReleasePeriod=as.character(versionReleasePeriod)\n",
+    "contents" : "#Script Created by Kanishk Asthana to get statistics for previous gencode releases.\narchivePage=readLines(\"http://www.gencodegenes.org/stats/archive.html\")\n#Finding gencode version indices\nversionIndices=grep(\"Version\\\\s[0-9]\",archivePage)\nversionLine=archivePage[versionIndices]\n\n#Storing Names of all Versions in a vector\nversionReleasePeriod=as.character(sapply(versionLine, function(line){\n  #Deleting First part of the String\n  line=sub(\".*\\\\(\",\"\",line)\n  #Deleting Second unwanted part of String\n  line=sub(\"\\\\sfreeze,\\\\s.*\\\\).*\",\"\",line)\n  print(line)\n  return(line)\n}))\n\n#Storing Version Numbers in a vector\nversions=as.character(sapply(versionLine, function(line){\n  match=regexpr(\"Version\\\\s.{1,2}\",line)\n  versionText=as.character(regmatches(line,match))\n  return(versionText)\n}))\n",
     "created" : 1450860565274.000,
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "3689694781",
+    "hash" : "3379219053",
     "id" : "59696E34",
-    "lastKnownWriteTime" : 1450864884,
+    "lastKnownWriteTime" : 1450865993,
     "path" : "/work/kanishk/Documents/Github/parseGencodeArchiveWebpage/parseWebpage.R",
     "project_path" : null,
     "properties" : {
