@@ -20,3 +20,23 @@ versions=as.character(sapply(versionLine, function(line){
   versionText=as.character(regmatches(line,match))
   return(versionText)
 }))
+
+#Adding 3 because the gene numbers are 3 lines down in the html
+
+#Two different formats in which data is organised so I have to split this operation into 2 parts
+totalGenesIndices1=grep("\\sTotal No of Genes",archivePage)+3
+#Removing Whitespaces and converting to numeric
+totalGenes1=as.numeric(gsub("\\s","",archivePage[totalGenesIndices1]))
+#Getting Line numbers for second format
+totalGeneIndices2=grep("<dt>Total No of Genes",archivePage)+1
+totalGenes2Lines=archivePage[totalGeneIndices2]
+totalGenes2=as.numeric(sapply(totalGenes2Lines,function(line){
+  #Removing HTML tags
+  line=gsub("<.{2,3}>","",line)
+  #Removing whitespace
+  line=gsub("\\s","",line)
+  print(line)
+  return(line)
+}))
+
+totalGenes=c(totalGenes1,totalGenes2)

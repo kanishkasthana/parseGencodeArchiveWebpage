@@ -1,12 +1,12 @@
 {
-    "contents" : "#Script Created by Kanishk Asthana to get statistics for previous gencode releases.\narchivePage=readLines(\"http://www.gencodegenes.org/stats/archive.html\")\n#Finding gencode version indices\nversionIndices=grep(\"Version\\\\s[0-9]\",archivePage)\nversionLine=archivePage[versionIndices]\n\n#Storing Names of all Versions in a vector\nversionReleasePeriod=as.character(sapply(versionLine, function(line){\n  #Deleting First part of the String\n  line=sub(\".*\\\\(\",\"\",line)\n  #Deleting Second unwanted part of String\n  line=sub(\"\\\\sfreeze,\\\\s.*\\\\).*\",\"\",line)\n  print(line)\n  return(line)\n}))\n\n#Storing Version Numbers in a vector\nversions=as.character(sapply(versionLine, function(line){\n  match=regexpr(\"Version\\\\s.{1,2}\",line)\n  versionText=as.character(regmatches(line,match))\n  return(versionText)\n}))\n",
+    "contents" : "#Script Created by Kanishk Asthana to get statistics for previous gencode releases.\narchivePage=readLines(\"http://www.gencodegenes.org/stats/archive.html\")\n#Finding gencode version indices\nversionIndices=grep(\"Version\\\\s[0-9]\",archivePage)\nversionLine=archivePage[versionIndices]\n\n#Storing Names of all Versions in a vector\nversionReleasePeriod=as.character(sapply(versionLine, function(line){\n  #Deleting First part of the String\n  line=sub(\".*\\\\(\",\"\",line)\n  #Deleting Second unwanted part of String\n  line=sub(\"\\\\sfreeze,\\\\s.*\\\\).*\",\"\",line)\n  print(line)\n  return(line)\n}))\n\n#Storing Version Numbers in a vector\nversions=as.character(sapply(versionLine, function(line){\n  match=regexpr(\"Version\\\\s.{1,2}\",line)\n  versionText=as.character(regmatches(line,match))\n  return(versionText)\n}))\n\n#Adding 3 because the gene numbers are 3 lines down in the html\n\n#Two different formats in which data is organised so I have to split this operation into 2 parts\ntotalGenesIndices1=grep(\"\\\\sTotal No of Genes\",archivePage)+3\n#Removing Whitespaces and converting to numeric\ntotalGenes1=as.numeric(gsub(\"\\\\s\",\"\",archivePage[totalGenesIndices1]))\n#Getting Line numbers for second format\ntotalGeneIndices2=grep(\"<dt>Total No of Genes\",archivePage)+1\ntotalGenes2Lines=archivePage[totalGeneIndices2]\ntotalGenes2=as.numeric(sapply(totalGenes2Lines,function(line){\n  #Removing HTML tags\n  line=gsub(\"<.{2,3}>\",\"\",line)\n  #Removing whitespace\n  line=gsub(\"\\\\s\",\"\",line)\n  print(line)\n  return(line)\n}))\n\ntotalGenes=c(totalGenes1,totalGenes2)",
     "created" : 1450860565274.000,
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "3379219053",
+    "hash" : "2250875189",
     "id" : "59696E34",
-    "lastKnownWriteTime" : 1450865993,
+    "lastKnownWriteTime" : 1450869135,
     "path" : "/work/kanishk/Documents/Github/parseGencodeArchiveWebpage/parseWebpage.R",
     "project_path" : null,
     "properties" : {
